@@ -22,7 +22,6 @@ post_curl() {
     "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/merge_requests/${MR_ID}/notes" \
     --data "body=""${COMMENT_MSG}"""
   echo $(cat ${LOG_FILE} | grep HTTP | awk '{print $2}')
-  return $(cat ${LOG_FILE} | grep HTTP | awk '{print $2}')
 }
 
 set_mr_id() {
