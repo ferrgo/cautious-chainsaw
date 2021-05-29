@@ -21,12 +21,12 @@ post_curl() {
     --header "PRIVATE-TOKEN: ${TOKEN}" \
     "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/merge_requests/${MR_ID}/notes" \
     --data "body=""${COMMENT_MSG}"""
-  echo $(cat ${LOG_FILE} | grep HTTP | awk '{print $2}')
+  grep HTTP <${LOG_FILE} | awk '{print $2}'
 }
 
 set_mr_id() {
   if [ -n "${CI_OPEN_MERGE_REQUESTS}" ]; then
-    log "Using list of open MR to get id"
+    log "Using list of open MR to get id"echo
     # List such as: 'gitlab-org/gitlab!333,gitlab-org/gitlab-foss!11'
     MR_ID=$(echo "${CI_OPEN_MERGE_REQUESTS}" | awk -F , '{print $1}' | awk -F ! '{print $2}')
   else
@@ -39,9 +39,8 @@ check_variables() {
   if [ -z "${TOKEN}" ]; then error 101 "API Token is not set or is blank"; fi
   if [ -z "${CI_API_V4_URL}" ]; then error 102 "API URL is not set or blank"; fi
   if [ -z "${CI_PROJECT_ID}" ]; then error 103 "ProjectID is not set or blank"; fi
-  if [ -z "${CI_MERGE_REQUEST_IID}" ] && [ -z "${CI_OPEN_MERGE_REQUESTS}" ]; 
-  then 
-    error 104 "No Variable for Merge Request ID"; 
+  if [ -z "${CI_MERGE_REQUEST_IID}" ] && [ -z "${CI_OPEN_MERGE_REQUESTS}" ]; then
+    error 104 "No Variable for Merge Request ID"
   fi
   if [ -z "${COMMENT_MSG}" ]; then error 105 "Message is not set or blank"; fi
 }
