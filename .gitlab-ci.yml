@@ -1,0 +1,45 @@
+stages:
+  - build
+  - test
+  - notify
+
+docker_build:
+  image: docker:latest
+  stage: build
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - docker build .
+  # Run this job in a branch where a Dockerfile exists
+  rules:
+    - if: $CI_COMMIT_BRANCH
+      exists:
+        - Dockerfile
+
+shell_check:
+  image: koalaman/shellcheck-alpine:stable
+  stage: test
+  before_script:
+    - shellcheck --version
+  script:
+    - shellcheck src/**/*.sh
+
+shfmt:
+  image: mvdan/shfmt:v3.2.0-alpine
+  stage: test
+  before_script:
+    - shfmt -version
+  script:
+    - shfmt -i 2 -ci -d src
+
+comment_mr:
+  image: ferrgo/gitlab-ci-notifier
+  stage: notify
+  variables:
+    TOKEN: ${CICD_COMMENTER_TOKEN}
+    COMMENT_MSG: "All passed to here"
+  needs: ["docker_build","shell_check","shfmt"]
+  script:
+      - "./notifier.sh"
