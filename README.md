@@ -2,7 +2,7 @@
 Shell script using [curl](https://curl.se/) and Gitlab CI Variables to post messages on Merge Requests
 
 ### Gitlab CI/CD Pipeline
-See the [.gitlab-ci.yml] for the example and the [execution](https://gitlab.com/ferrgo/gitlab-ci-notifier/-/merge_requests/1)
+See the [.gitlab-ci.yml](.gitlab-ci.yml) for the example and the [execution](https://gitlab.com/ferrgo/gitlab-ci-notifier/-/merge_requests/3)
 
 ### Usage
 The script looks for the following variables:
