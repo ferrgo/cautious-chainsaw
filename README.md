@@ -1,4 +1,13 @@
 ## Notifier for Gitlab CI/CD Pipeline
+[![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/ferrgo/gitlab-ci-notifier)](https://hub.docker.com/r/ferrgo/gitlab-ci-notifier)
+
+
+[![Docker Pulls](https://img.shields.io/docker/pulls/ferrgo/gitlab-ci-notifier)](https://hub.docker.com/r/ferrgo/gitlab-ci-notifier)
+[![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/ferrgo/gitlab-ci-notifier)](https://hub.docker.com/r/ferrgo/gitlab-ci-notifier)
+[![Latest](https://img.shields.io/github/v/tag/ferrgo/gitlab-ci-notifier)](ferrgo/gitlab-ci-notifier/releases/latest)
+[![License](https://img.shields.io/badge/license-GPL--3.0-blue.svg?style=flat)](LICENSE)
+
+----
 Shell script using [curl](https://curl.se/) and Gitlab CI Variables to post messages on Merge Requests
 
 ### Gitlab CI/CD Pipeline
