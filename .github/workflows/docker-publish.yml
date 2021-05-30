@@ -12,22 +12,6 @@ env:
   IMAGE_NAME: gitlab-ci-notifier
 
 jobs:
-  shellcheck:
-    runs-on: koalaman/shellcheck-alpine:stable
-    steps:
-      - uses: actions/checkout@v2
-      - name: Check script
-        run: |
-          shellcheck --version
-          shellcheck src/**/*.sh
-  shfmt:
-    runs-on: mvdan/shfmt:v3.2.0-alpine
-    steps:
-      - uses: actions/checkout@v2
-      - name: Check script lint
-        run: |
-          shfmt -version
-          shfmt -i 2 -ci -d src
   test:
     runs-on: ubuntu-latest
     steps:
