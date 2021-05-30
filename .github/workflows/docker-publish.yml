@@ -7,27 +7,25 @@ on:
       - dev
     tags:
       - v*
+  pull_request:
+    branch:
+      - main
+      - dev
 
 env:
   IMAGE_NAME: gitlab-ci-notifier
 
 jobs:
-  shellcheck:
-    runs-on: koalaman/shellcheck-alpine:stable
+  sh-checker:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Check script
-        run: |
-          shellcheck --version
-          shellcheck src/**/*.sh
-  shfmt:
-    runs-on: mvdan/shfmt:v3.2.0-alpine
-    steps:
-      - uses: actions/checkout@v2
-      - name: Check script lint
-        run: |
-          shfmt -version
-          shfmt -i 2 -ci -d src
+      - uses: actions/checkout@v1
+      - name: Run the sh-checker
+        uses: luizm/action-sh-checker@v0.1.12
+        env:
+          SHFMT_OPTS: -i 2 -ci -d
+        with:
+          sh_checker_comment: true
   test:
     runs-on: ubuntu-latest
     steps:
