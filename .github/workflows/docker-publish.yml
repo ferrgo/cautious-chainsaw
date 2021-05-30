@@ -23,6 +23,8 @@ jobs:
       - name: Run the sh-checker
         uses: luizm/action-sh-checker@v0.1.12
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SHELLCHECK_OPTS: -P ./**/src/
           SHFMT_OPTS: -i 2 -ci -d
         with:
           sh_checker_comment: true
