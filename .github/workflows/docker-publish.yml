@@ -7,6 +7,10 @@ on:
       - dev
     tags:
       - v*
+  pull_request:
+    branches:
+      - main
+      - dev
 
 env:
   IMAGE_NAME: gitlab-ci-notifier
