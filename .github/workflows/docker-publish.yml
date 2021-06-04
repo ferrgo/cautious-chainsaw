@@ -12,7 +12,16 @@ env:
   IMAGE_NAME: gitlab-ci-notifier
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2 
+      - name: hadolint
+        uses: reviewdog/action-hadolint@v1
+        with:
+          filter_mode: nofilter
   test:
+    needs: lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
