@@ -1,4 +1,4 @@
-FROM ferrgo/curlybox
+FROM ferrgo/curlybox:0.2.1
 
 WORKDIR /home
 
